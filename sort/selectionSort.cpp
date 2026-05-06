@@ -15,9 +15,7 @@ void SELECTION_SORT(int a[], int n) {
             if (a[j] < a[mini])
                 mini = j;
         }
-        if (i != mini) {
-            swap(a[i], a[mini]);
-        }
+        swap(a[i], a[mini]);
     }
 }
 

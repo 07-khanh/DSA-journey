@@ -11,16 +11,16 @@ int RIGHT(int i) {
     return 2*i+1;
 }
 
+// Recurrence: T(n) = T(2n/3) + Theta(1)
 // O(lgn)
 int MAX_HEAPIFY(int** A, int i, int n) {
     int l = LEFT(i);
     int r = RIGHT(i);
-    int largest;
-    if (l <= n && A[l] > A[i])
+    int largest = i;
+    
+    if (l < n && A[l] > A[i])
         largest = l;
-    else
-        largest = i;
-    if (r <= n && A[r] > A[largest])
+    if (r < n && A[r] > A[largest])
         largest = r;
     if (i != largest) {
         swap(A[i], A[largest]);
