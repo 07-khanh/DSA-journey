@@ -8,7 +8,7 @@
 - **Height** of node: # edges on the longest simple path from node -> leaf.
     - Height of tree is the height of root, and is equal to max depth of any node in the tree.
 
-<img src=image.png width=50%>
+<img src=./images/image.png width=50%>
 
 ## Properties of BT:
 > [!NOTE]
