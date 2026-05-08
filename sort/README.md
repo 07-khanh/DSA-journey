@@ -2,8 +2,10 @@
 
 ## Basics:
 - **In-place**: use constant space, only modify the input array.
+  
     (Selection Sort, Bubble Sort, Insertion Sort and Heap Sort).
 - **Stable**: **same** items have the same order in sorted array as in orignal array.
+  
     (Merge Sort, Insertion Sort, Bubble Sort).
 
 ## Comparison-based:
@@ -25,10 +27,11 @@ BUBBLE_SORT(int a, int n)
 ```
 
 > [!IMPORTANT] 
-> - Time complexity: 
-    - Normal version: $\Theta(n^2)$ for all cases.
-    - Optimized version: $\Theta(n)$ for best cases.
+> - Time complexity:
+>   - Normal version: $\Theta(n^2)$ for all cases.
+>    - Optimized version: $\Theta(n)$ for best cases.
 > - Space complexity: $\Theta(1)$.
+>   
 > Bubble sort is **stable**.
 
 > [!NOTE]
@@ -40,7 +43,7 @@ BUBBLE_SORT(int a, int n)
 > 
 > This is an arithmetic series:
 > 
-> $C(n) = \sum_{i=1}^{n-1}i = \dfrac{n(n-1)}{2} = \dfrac{n^2}{2} - \dfrac{n}{2}$.
+> $$C(n) = \sum_{i=1}^{n-1}i = \dfrac{n(n-1)}{2} = \dfrac{n^2}{2} - \dfrac{n}{2}$$
 > 
 > Thus, the running time for bubble sort is $\Theta(n^2)$ for all cases.
 
@@ -77,6 +80,7 @@ SELECTION_SORT(a, n)
 > [!IMPORTANT]
 > - Time complexity: $\Theta(n^2)$ for all cases.
 > - Space complexity: $\Theta(1)$.
+>   
 > Selection Sort is **unstable**.
 
 > [!NOTE]
@@ -129,6 +133,7 @@ INSERTION_SORT(a, n)
 >   - Worst case (array is in reverse order): $\Theta(n^2)$.
 >   - Average case: $\Theta(n^2)$.
 > - Space complexity: $\Theta(1)$.
+>   
 > Insertion Sort is **stable**.
 
 > [!NOTE]
@@ -158,8 +163,8 @@ INSERTION_SORT(a, n)
 > 
 > **Loop invariant**: At the start of each iteration in lines `1-8`, the subarray `a[0...i-1]` contains $i$ elements originally in `a[0...i-1]` but in sorted order.
 > - **Initialization**: When `i=1`, `a[0...0]` contains only one element `a[0]`, which is the original element in `a[0]`, and this subarray is sorted. Thus, the invariant holds.
-> - **Maintenance**: Suppose the invariant is true prior to each iteration. Then, `a[0...i-1]` is sorted. 
->     - The inner loop repeatedly move `a[i-2], a[i-3]...` by one position to the right until it finds a proper position for `a[i]`. The subarray `a[0...i]` then contains the original elements in `a[0...i]` but in sorted order.
+> - **Maintenance**: Suppose the invariant is true prior to each iteration. Then, `a[0...i-1]` is sorted at the start of interation `i`. 
+>     - The inner loop repeatedly move `a[i-1], a[i-2]...` by one position to the right until it finds a proper position for `a[i]`. The subarray `a[0...i]` then contains the original elements in `a[0...i]` but in sorted order.
 >     - When the loop increments $i$ for the next round, the invariant is maintained.  
 > - **Termination**: The loop terminates when `i=n`. Then, the subarray `a[0...n-1]` contains $n$ elements originally in `a[0...n-1]` but in sorted order. Thus, the entire array is sorted.
 
@@ -186,11 +191,13 @@ Thus, the maximum element in a max-heap is at the root. Similar argument for min
 
 ```cpp
 PARENT(i)
-    return floor( (n-1)/2 )
-
+    return floor( (i-1)/2 )
+```
+```cpp
 LEFT(i)
     return 2 * i + 1
-
+```
+```cpp
 RIGHT(i)
     return 2 * i + 2
 ```
@@ -199,7 +206,7 @@ RIGHT(i)
 
 ##### Max-Heapify:
 Used to mainain heap property.
-- Before, `MAX_HEAPIFY`, `a[i]` may be smaller than its children.
+- Before `MAX_HEAPIFY`, `a[i]` may be smaller than its children.
     Assume left and right subtree are max-heaps.
 - After `MAX_HEAPIFY`, the subtree rooted at `i` is a max-heap.
   
@@ -241,7 +248,7 @@ MAX_HEAPIFY(a, i, n)
 
 ```cpp
 BUILD_MAX_HEAP(a, n)
-    for i = floor( (n-1)/2 ) downto 0
+    for i = (floor(n/2) - 1) downto 0
         MAX_HEAPIFY(a, i, n)
 ```
 
@@ -255,22 +262,25 @@ BUILD_MAX_HEAP(a, n)
 >
 > $$T(n) = \sum_{h=0}^{\lfloor \lg n \rfloor} \left\lceil \frac{n}{2^{h+1}} \right\rceil O(h) = O\left(n \sum_{h=0}^{\lfloor \lg n \rfloor} \frac{h}{2^h}\right) \text{}$$
 > 
-> To evaluate the summation $\sum_{h=0}^{\infty} \frac{h}{2^h}$, we use the general geometric series formula:$
+> To evaluate the summation $\sum_{h=0}^{\infty} \frac{h}{2^h}$, we use the general geometric series formula:
 >
-> $\sum_{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}$$
+> $$\sum_{k=0}^{\infty} kx^k = \frac{x}{(1-x)^2}$$
 >
 > By substituting $x = 1/2$, the sum becomes:
 >
 > $$\frac{1/2}{(1-1/2)^2} = \frac{1/2}{1/4} = 2 \text{}$$
 >
-> Since the summation part is just a constant (2), the entire expression simplifies to:$$T(n) = O(n \cdot 2) = O(n)$$
-> Thus, BUILD_MAX_HEAP takes **linear time**.
+> Since the summation part is just a constant (2), the entire expression simplifies to:
+>
+> $$T(n) = O(n \cdot 2) = O(n)$$
+> 
+> Thus, `BUILD_MAX_HEAP` takes **linear time**.
 
 > [!NOTE]
 > **Correctness of `BUILD_MAX_HEAP`**
 > 
 > **Loop invariant**: At the start of each iteration of the `for` loop, every node `i+1`, `i+2`..., `n` is the root of a valid max-heap.
-> - **Initialization**: Before the first iteration, `i=floor( (n-1)/2 )`. The node indexed from `floor( (n-1)/2 ) + 1` till `n-1` are leaves of the tree. Since leaves have no children, they are roots of valid max-heap.
+> - **Initialization**: Before the first iteration, `i=floor(n/2) - 1`. The node indexed from `floor(n/2)` till `n-1` are leaves of the tree. Since leaves have no children, they are roots of valid max-heap.
 > - **Maintenance**: Suppose the invariant holds for `i`. All children of `i` are indexed higher than `i`, so by the invariant, they are roots of max-heap. Calling `MAX_HEAPIFY` on `i` will also make `i` root of a max-heap. Decrementing `i` reestablishes the loop invariant at each iteration.
 > - **Termination**: When `i = -1`, the loop ends. By the invariant, all nodes, notably node `0` are max-heap roots. Therefore, the entire array satisfies max-heap property.
 
@@ -280,7 +290,7 @@ HEAPSORT(a, n)
 1.    BUILD_MAX_HEAP(a, n)
 2.    for i = n-1 downto 1
 3.        swap(a[i], a[0])
-4.        MAX_HEAPIFY(a, 0, n-1)
+4.        MAX_HEAPIFY(a, 0, i)
 ```
 
 > [!IMPORTANT] 
@@ -304,7 +314,7 @@ HEAPSORT(a, n)
 ### Merge Sort:
 <a href="/sort/mergeSort.cpp">MergeSort</a>
 
-Merge Sor follows **Divides and Conquer** approach. It recursively divides the array into two halves, recursively sorts each half, then merges them back together to obtain sorted array.
+Merge Sort follows **Divides and Conquer** approach. It recursively divides the array into two halves, recursively sorts each half, then merges them back together to obtain sorted array.
 
 To sort `a[low...high]`:
 - **Divide** by splitting into two subarrays `a[low...mid]` and `a[mid+1...high]` where `mid` is a halfway point of `a[low...high]`
@@ -341,8 +351,8 @@ MERGE(a, low, mid, high)
     // Copy the remaining elements of R, if there are any
     while j < n_r
         a[k++] = R[j++]
-
-
+```
+```cpp
 MERGE_SORT(a, low, high)
     if low >= high 
         return
@@ -410,7 +420,7 @@ MERGE_SORT(a, low, high)
 Quicksort is a sorting algorithm based on **Divide and Conquer** that picks an element as pivot and partitions the array into two subarrays around the pivot by placing the pivot in its correct position in the sorted array.
 
 To sort `a[low...high]`
-- **Divide**: Partition `a[low..high]`, into two (possibly empty) subarrays `a[low..pi−1]` and `a[pi+1..high]`, such that each element in the first subarray `a[low... pi−1]` is $\le$ `a[pi]` and `a[pi]` is $\le$ each element in the second subarray `a[pi+1 ..high]`.
+- **Divide**: Partition `a[low..high]` into two (possibly empty) subarrays `a[low..pi−1]` and `a[pi+1..high]`, such that each element in the first subarray `a[low... pi−1]` is $\le$ `a[pi]` and `a[pi]` is $\le$ each element in the second subarray `a[pi+1 ..high]`.
 - **Conquer**: Sort the two subarrays recursively using `QUICKSORT`
 - **Combine**: No work is needed to combine the subarrays, because they are sorted **in place**.
 
@@ -427,8 +437,8 @@ PARTITION(a, low, high)
     
     swap a[i + 1] and a[high]   // pivot goes just to the right of the low side
     return i + 1                // new index of the pivot
-
-
+```
+```cpp
 QUICK_SORT(a, low, high)
     if low >= high 
         return
@@ -443,6 +453,7 @@ QUICK_SORT(a, low, high)
 > Time complexity:
 >    - Worst case: $\Theta(n^2)$.
 >    - Best/ average case: $\Theta(n\log n)$
+>      
 > Auxilliary Space:
 >    - Worst case: $O(n)$ _unbalanced partitioning leading to skewed recursion tree_.
 >    - Best/Average case: $O(\log n)$.
@@ -468,6 +479,7 @@ QUICK_SORT(a, low, high)
 > 
 > **Balanced partitioning**:
 > If the partitioning ratio is constant, the running time will always be $O(n\log n)$.
+> 
 > Supposed the ratio is $9 : 1$, we get the recurrence:
 > ```math
 > \begin{align*}
@@ -490,8 +502,10 @@ QUICK_SORT(a, low, high)
 > - There are usually a mix of good and bad splits.
 > 
 > **Intuition**: When there are alternating good and bad splits, the cost of bad splits can be absorbed into the cost of good splits, and only affect the constant hidden by $O$-notation.
-> The average case analysis considers all possible proportions of the two subarrays, sums up the cost in each case, and divides by the # of cases. 
-> We make a reasonable simplifying assumption that after each partition step, the pivot is equally likely to split the array into subarrays of size 0 and n-1, 1 and n-2, and so on. In other words, the pivot is equally likely to end in any position (in the sorted array). And since we have $n$ positions, the average cost of each recursion can be modeled as:
+>
+> The average case analysis considers all possible proportions of the two subarrays, sums up the cost in each case, and divides by the # of cases.
+> 
+> We make a reasonable simplifying assumption that after each partition step, the pivot is equally likely to split the array into subarrays of size $0$ and $n-1$, $1$ and $n-2$, and so on. In other words, the pivot is equally likely to end in any position (in the sorted array). And since we have $n$ positions, the average cost of each recursion can be modeled as:
 >
 > ```math
 > \dfrac{1}{n}  \sum_{k=0}^{n-1} \left[T(k) + T(n-1-k)\right]
@@ -517,9 +531,9 @@ QUICK_SORT(a, low, high)
 > 
 > Take $(1)-(2)$:
 > 
-> $$nT(n) - (n-1)T(n-1) = 2T(n-1) + a(2n - 1)$$
+> $$nT(n) - (n-1)T(n-1) = 2T(n-1) + c(2n - 1)$$
 > 
-> $$\Rightarrow T(n) = (n+1)T(n-1) + a(2n - 1) = \Theta(n \log n)$$
+> $$\Rightarrow T(n) = (n+1)T(n-1) + c(2n - 1) = \Theta(n \log n)$$
 > 
 > <a href="https://www.geeksforgeeks.org/dsa/time-and-space-complexity-analysis-of-quick-sort/">More Detail</a>
 
@@ -563,7 +577,7 @@ QUICK_SORT(a, low, high)
 A comparison sort only use comparisons to gain information about the relative order of elements in the input sequence.
 
 We will prove that the lower bound of comparison sorts is $\Omega(n \log n)$ using **decision tree** model.
-##### Decision Tree
+#### Decision Tree
 Decision tree is a **full binary tree**, which represents the comparisons made by a specific sorting algorithm on input with a given size. 
 
 We will abstract everything else: control, data movement and only **count comparisons**.
@@ -671,10 +685,10 @@ RADIX_SORT(a, d)
 > 
 > Use **induction** on # of passes, which is `i`.
 > 
-> Assuming that digits $1, 2,...,$`i`$-1$ are sorted.
+> Assuming that digits $1, 2,...,i-1$ are sorted.
 > 
 > We prove that stable sort on digit `i` leaves digits $1, 2,..,$`i` sorted:
-> - If $2$ digits in position `i` are different, then the ordering by position `i` is correct, and positions $1, 2,...,$`i`$-1$ are irrelevant.
+> - If $2$ digits in position `i` are different, then the ordering by position `i` is correct, and positions $1, 2,...,i-1$ are irrelevant.
 > - If $2$ digits in position `i` are the same, then numbers are already in correct order (by inductive hypothesis). The stable sort on digit `i` leaves them in the right order.
 >
 > This is why using a **stable** sort algorithm is so important
