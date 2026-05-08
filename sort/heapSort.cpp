@@ -14,34 +14,36 @@ int RIGHT(int i) {
 
 // Recurrence: T(n) = T(2n/3) + Theta(1)
 // O(lgn)
-int MAX_HEAPIFY(vector<int>& A, int i, int n) {
+int MAX_HEAPIFY(vector<int>& heap, int i, int n) {
     int l = LEFT(i);
     int r = RIGHT(i);
     int largest = i;
     
-    if (l < n && A[l] > A[i])
+    if (l < n && heap[l] > heap[i])
         largest = l;
     
-    if (r < n && A[r] > A[largest])
+    if (r < n && heap[r] > heap[largest])
         largest = r;
     
     if (i != largest) {
-        swap(A[i], A[largest]);
-        MAX_HEAPIFY(A, largest, n);
+        swap(heap[i], heap[largest]);
+        MAX_HEAPIFY(heap, largest, n);
     }
 }
 
 // O(n)
-void BUILD_MAX_HEAP(vector<int>& A, int n) {
+void BUILD_MAX_HEAP(vector<int>& heap) {
+    int n = heap.size();
     for (int i = n/2 - 1; i >= 0; --i) {
-        MAX_HEAPIFY(A, i, n);
+        MAX_HEAPIFY(heap, i, n);
     }
 }
 
 //===========================
 // IN-PLACE VERSION
 //===========================
-void HEAPSORT(vector<int>& A, int n) {
+void HEAPSORT(vector<int>& A) {
+    int n = A.size();
     BUILD_MAX_HEAP(A, n);
     
     for (int i = n - 1; i >= 1; --i) {
@@ -82,10 +84,12 @@ void INSERT(vector<int>& heap, int value) {
     }
 }
 
-void HEAPSORT(vector<int>& A, int n) {
+void HEAPSORT(vector<int>& A) {
+    int n = A.size();
     vector<int> heap;
     for (int i{0}; i < n; ++i)
-        INSERT(heap, A[i]);
+        heap.push_back(A[i]);
+    BUILD_MAX_HEAP(A[i]);
 
     for (int i{n-1}; i >= 0; --i) {
         int maxi = EXTRACT_MAX(heap);
