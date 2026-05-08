@@ -1,7 +1,4 @@
-<link rel="stylesheet" href = "styles.css">
-<center>
-    <h1>BINARY TREES<h1>
-</center>
+# BINARY TREES
 
 ## Some Definitions:
 - **Internal node**: node having at least one child.
@@ -23,22 +20,29 @@
 > 6. Number of empty subtrees in any BT: $n-1$.
 
 ## Types of BT:
+
 ### Full Binary Tree:
+
 Binary Tree with either 0 or 2 child nodes for each node.
 
 <img src="images/image-3.png" width=50%>
 
-> [!IMPORTANT] Full Binary Tree Theorem
+> [!IMPORTANT]
+> **Full Binary Tree Theorem**
+> 
 > Let $T$ be a nonempty, full BT then:
+> 
 > If $T$ has $I$ internal nodes, # leaves in $T$ is: $L = I + 1$.[^3]
 
 
 ### Complete Binary Tree:
+
 All levels are filled except for the last level, which is filled from as left as possible.
 
 <img src="images/image-2.png" width=50%>
 
 #### Properties of Complete BT
+
 - **Array Representation** : Complete BT can be stored in an array without using pointers. If root is at index $0$, for any node at index $i$:
     - Left child: $2i+1$.
     - Right child: $2i+2$.
@@ -49,7 +53,8 @@ All levels are filled except for the last level, which is filled from as left as
 
 #### Check if a BT is a Complete BT:
 Leverage the array index properties. <a href="#properties-of-complete-bt">view</a>
-```
+
+```cpp
 bool countNodes(node, index, totalNodes)
     If node is NULL
         return true
@@ -64,7 +69,9 @@ bool countNodes(node, index, totalNodes)
 ```
 
 ### Perfect Binary Tree:
+
 Every internal nodes has exactly **two** children, and all leaf nodes are at the **same level**.
+
 <img src="images/image-4.png" width=50%>
 
 Recursively, a perfect BT can be defined as:
@@ -72,7 +79,8 @@ Recursively, a perfect BT can be defined as:
 2. If a node has $h > 0$, it is a perfect BT if both its left and right subtree have height $h-1$.
 
 #### Properties of Perfect BT:
-> [!IMPORTANT] Perfect Binary Tree (PBT) Theorems
+> [!IMPORTANT]
+> **Perfect Binary Tree (PBT) Theorems**
 > 1. \# nodes in PBT with height $h$: $2^{h+1}-1$.
 > 2. Height of PBT with $n$ nodes: $\log(n+1)-1$.
 > 3. \# leaf nodes in PBT with height $h$: $2^h$.
@@ -81,7 +89,8 @@ Recursively, a perfect BT can be defined as:
 Approach: 
 - If a node has only 1 child, it's immediately not perfect.
 - If a node is a leaf, the leaf's level must be equal to the expected depth (in this code, we will calculate depth of leftmost leaf).
-```
+  
+``` cpp
 // Calculate depth of leftmost leaf
 int leftDepth(root) 
     d = 0
@@ -111,7 +120,8 @@ bool checkPerfectTree(root)
 ```
 
 ## Basic Operations
-> [!IMPORTANT] Traversals
+> [!IMPORTANT]
+> **Traversals**:
 > **DFS** (Preorder, Inorder, Postorder) vs **BFS** (Level order)
 > - **Implementation**: Recursion or Iterative using Stack and Queue
 >   - Time complexity: $O(n)$.  
@@ -128,7 +138,7 @@ A single traversal sequence (Preorder, Inorder, or Postorder) can represent many
 - The Root Identifier: **Preorder** or **Postorder** sequences.
 - The Structural Divider: The **Inorder** sequence.
 
-#### **Required Traversal Combinations** are:
+#### Required Traversal Combinations are:
 1. **Inorder + Preorder**: 
     - **Preorder** gives the root of the current (sub)tree as its first element.
     - **Inorder** uses that root to divide the remaining nodes into the left and right subtrees.
@@ -136,7 +146,9 @@ A single traversal sequence (Preorder, Inorder, or Postorder) can represent many
     - **Postorder** gives the root as its last element.
     - **Inorder** divides the nodes into left and right subtrees.
 
-> [!NOTE] Requirements to construct unique Binary Tree:
+> [!NOTE]
+> Requirements to construct unique Binary Tree:
+> 
 > **Inorder + Preorder** or **Inorder + Postorder**
 
 #### Why Preorder + Postorder Fails
@@ -146,15 +158,16 @@ Preorder and Postorder sequences together are insufficient to uniquely construct
 Consider two distinct trees:
 
 - Tree $A$: Root $1$ has a Left child $2$.
-
 - Tree $B$: Root $1$ has a Right child $2$.
 
 $\Rightarrow$ Preorder for both: $[1, 2]$ (Root, then child).
+
 $\Rightarrow$ Postorder for both: $[2, 1]$ (Child, then root).
 
 Because the sequences are identical for two different tree structures, the mapping is not bijective (one-to-one), and a unique tree cannot be guaranteed.
 
-> [!CAUTION] Exception: 
+> [!CAUTION]
+> **EXCEPTION**
 > A unique tree can be constructed from Preorder and Postorder if the tree is a **Full Binary Tree** (where every node has either 0 or 2 children).
 
 #### Recursive Construction Logic (Preorder + Inorder):
@@ -168,7 +181,8 @@ The process of construction follows a "Divide and Conquer" pattern:
 - **Recurse**:
     - Repeat for the left subtree using the corresponding slices of Preorder and Inorder.
     - Repeat for the right subtree.
-> [!CAUTION] Another way
+> [!CAUTION]
+> **Another way**
 > **Inorder + Level-order** is also sufficient to construct a unique binary tree, but more complicated.
 
 ## Problems:
