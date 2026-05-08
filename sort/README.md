@@ -479,13 +479,13 @@ QUICK_SORT(a, low, high)
 > We can feel this looking at the recursion tree.
 > 
 > <img src="/sort/images/image-2.png" width=70%>
-
+>
 > As long as the split ratio is constant, the height of the recursion tree is always $O(\log n)$.
 > 
 > **Average case**:
 > 
 > <img src="/sort/images/image-3.png" width=70%>
-
+>
 > - Splits are not always constant.
 > - There are usually a mix of good and bad splits.
 > 
