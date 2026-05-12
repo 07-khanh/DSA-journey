@@ -55,17 +55,27 @@ All levels are filled except for the last level, which is filled from as left as
 Leverage the array index properties. <a href="#properties-of-complete-bt">view</a>
 
 ```cpp
-bool countNodes(node, index, totalNodes)
-    If node is NULL
-        return true
+COUNT_NODES(root)
+    if root is NULL
+        return 0
+    return 1 + COUNT_NODES(root->left) + COUNT_NODES(root->right)
+```
+```cpp
+CHECK(node, index, totalNodes)
+If node is NULL
+    return true
 
-    // Invalid index
-    If idx >= totalNodes
-        return false
+// Invalid index
+If idx >= totalNodes
+    return false
 
-    return countNodes(node->left, 2*index+1, totalNodes)
-            && countNodes(node->right, 2*index+2, totalNodes)
-    
+return countNodes(node->left, 2*index+1, totalNodes)
+        and countNodes(node->right, 2*index+2, totalNodes)
+```
+```cpp
+CHECK_COMPLETE(root)
+    totalNodes = COUNT_NODES(root)
+    return CHECK(root, 0, totalNodes)
 ```
 
 ### Perfect Binary Tree:
