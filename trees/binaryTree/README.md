@@ -180,6 +180,7 @@ Because the sequences are identical for two different tree structures, the mappi
 
 > [!CAUTION]
 > **EXCEPTION**
+> 
 > A unique tree can be constructed from Preorder and Postorder if the tree is a **Full Binary Tree** (where every node has either 0 or 2 children).
 
 #### Recursive Construction Logic (Preorder + Inorder):
@@ -195,6 +196,7 @@ The process of construction follows a "Divide and Conquer" pattern:
     - Repeat for the right subtree.
 > [!CAUTION]
 > **Another way**
+> 
 > **Inorder + Level-order** is also sufficient to construct a unique binary tree, but more complicated.
 
 ## Problems:
