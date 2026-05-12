@@ -3,7 +3,8 @@
 ## Properties:
 - Self balancing BST.
 - Maintaing extra information called **balanced factor** whose value is $\in \\{-1;0;1\\}$.
-- **Balanced Factor**: $$BF(N) = \text{Height}(\text{Left Subtree}) - \text{Height}(\text{Right Subtree})$$ By keeping balance factor of each node $\in \{-1;0;1\}$ after operations, AVL tree is balanced.
+- **Balanced Factor**: $$BF(N) = \text{Height}(\text{Left Subtree}) - \text{Height}(\text{Right Subtree})$$.
+  - By keeping balance factor of each node $\in \{-1;0;1\}$ after operations, AVL tree is balanced.
   
 <img src="/trees/AVLTree/images/image.png" width=50%></a>
 
