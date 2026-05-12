@@ -92,7 +92,7 @@ Recursively, a perfect BT can be defined as:
 > [!IMPORTANT]
 > **Perfect Binary Tree (PBT) Theorems**
 > 1. \# nodes in PBT with height $h$: $2^{h+1}-1$.
-> 2. Height of PBT with $n$ nodes: $\log(n+1)-1$.
+> 2. Height of PBT with $n$ nodes: $\log_2(n+1)-1$.
 > 3. \# leaf nodes in PBT with height $h$: $2^h$.
 
 #### Check for Perfect BT:
