@@ -13,7 +13,7 @@
 ## Properties of BT:
 > [!NOTE]
 > 1. Max # nodes at level $l$ : $2^l$.
-> 2. Max # nodes of BT of height $h$: $2^{h+1}-1$.[^1]
+> 2. Max # nodes of BT of height $h$: $2^{h+1}-1$.
 > 3. Min height for $N$ nodes: $\lfloor \log_2N \rfloor$.[^2]
 > 4. Min levels for $L$ leaves: $\lfloor \log_2L \rfloor$
 > 5. Total edges of BT with $n$ nodes: $n-1$ _(Because each node has 1 parent, except root)_.
@@ -98,7 +98,8 @@ int leftDepth(root)
         ++d
         node = node->left
     return d
-
+```
+```cpp
 bool checkPerfect(node, depth, level)
     if root is NULL
         return true
@@ -111,7 +112,8 @@ bool checkPerfect(node, depth, level)
     
     return checkPerfect(root->left, depth, level+1)
         && checkPerfect(root->right, depth, level+1)
-
+```
+```cpp
 bool checkPerfectTree(root) 
     if root is NULL
         return true
