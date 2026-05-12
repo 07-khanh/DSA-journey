@@ -45,7 +45,7 @@
 >
 >$$N(h) = F_{h+3} - 1$$
 >
-> <img src="/trees/AVLTree/images/image-1.png  width=50%"></a>
+> <img src="/trees/AVLTree/images/image-1.png"  width=50%></a>
 >
 >_(Even though # nodes does not follow Fibonacci sequence exactly, # leaves do)._
 >
