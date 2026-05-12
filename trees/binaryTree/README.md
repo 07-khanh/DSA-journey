@@ -102,15 +102,15 @@ Approach:
   
 ``` cpp
 // Calculate depth of leftmost leaf
-int leftDepth(root) 
-    d = 0
+LEFT_DEPTH(root) 
+    set d = 0
     while root->left is not NULL 
-        ++d
+        d = d + 1
         node = node->left
     return d
 ```
 ```cpp
-bool checkPerfect(node, depth, level)
+CHECK(node, depth, level)
     if root is NULL
         return true
     
@@ -120,15 +120,15 @@ bool checkPerfect(node, depth, level)
     if root->right is NULL or root->left is NULL
         return false
     
-    return checkPerfect(root->left, depth, level+1)
-        && checkPerfect(root->right, depth, level+1)
+    return CHECK(root->left, depth, level+1)
+        && CHECK(root->right, depth, level+1)
 ```
 ```cpp
-bool checkPerfectTree(root) 
+CHECK_PERFECt(root) 
     if root is NULL
         return true
-    depth = leftDepth(root)
-    return checkPerfect(root, depth, 0)
+    depth = LEFT_DEPTH(root)
+    return CHECK_PERFECt(root, depth, 0)
 ```
 
 ## Basic Operations
