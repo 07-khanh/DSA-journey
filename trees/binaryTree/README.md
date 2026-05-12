@@ -200,24 +200,24 @@ The process of construction follows a "Divide and Conquer" pattern:
 > **Inorder + Level-order** is also sufficient to construct a unique binary tree, but more complicated.
 
 ## Problems:
-1. <a href="/maxHeight.cpp">Max Depth</a>.
-2. <a href="/checkBalanced.cpp">Check for Balanced BT</a>.
-3. <a href="/diameter.cpp">Find diameter of BT</a>[^4].
-4. <a href="/maxPathSum.cpp">Find max path sum</a>.
+1. <a href="./maxHeight.cpp">Max Depth</a>.
+2. <a href="./checkBalanced.cpp">Check for Balanced BT</a>.
+3. <a href="./diameter.cpp">Find diameter of BT</a>[^4].
+4. <a href="./maxPathSum.cpp">Find max path sum</a>.
 5. <a href="">Check if two BT are identical</a>.
-6. <a href ="/zigzag.cpp">Zig zag Level order Traversal</a>.
-7. <a href="/boundaryTraversal.cpp">Boundary Traversal</a>.
-8. <a href="/verticalOrder.cpp">Vertical Order Traversal</a>
-9. <a href="/rightView.cpp">Right/Left view of BT</a>.
-10. <a href="/mirror.cpp">Symmetric Tree</a>.
-11. <a href="/rootToNodePath.cpp">Root to Node Path</a>.
-12. <a href="/lca.cpp">LCA in BT</a>.
-13. <a href="/maxWidth.cpp">Max Width of BT</a>.
-14. <a href="/distKth.cpp">Print all nodes with Distance K</a>.
-15. <a href="/infectionTime.cpp">Amount of Time for Binary Tree to Be Infected</a>.
-16. <a href="/countNodeComplete.cpp">Count Complete Tree Nodes</a>.
-17. <a href="/constructPaths.cpp">Construct Binary Tree from Preorder and Inorder Traversal</a>.
-18. <a href="/flatten.cpp">Flatten BT to Linked List</a>.
+6. <a href ="./zigzag.cpp">Zig zag Level order Traversal</a>.
+7. <a href="./boundaryTraversal.cpp">Boundary Traversal</a>.
+8. <a href="./verticalOrder.cpp">Vertical Order Traversal</a>
+9. <a href="./rightView.cpp">Right/Left view of BT</a>.
+10. <a href="./mirror.cpp">Symmetric Tree</a>.
+11. <a href="./rootToNodePath.cpp">Root to Node Path</a>.
+12. <a href="./lca.cpp">LCA in BT</a>.
+13. <a href="./maxWidth.cpp">Max Width of BT</a>.
+14. <a href="./distKth.cpp">Print all nodes with Distance K</a>.
+15. <a href="./infectionTime.cpp">Amount of Time for Binary Tree to Be Infected</a>.
+16. <a href="./countNodeComplete.cpp">Count Complete Tree Nodes</a>.
+17. <a href="./constructPaths.cpp">Construct Binary Tree from Preorder and Inorder Traversal</a>.
+18. <a href="./flatten.cpp">Flatten BT to Linked List</a>.
 
 
 
