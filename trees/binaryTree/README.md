@@ -128,7 +128,7 @@ CHECK_PERFECt(root)
     if root is NULL
         return true
     depth = LEFT_DEPTH(root)
-    return CHECK_PERFECt(root, depth, 0)
+    return CHECK(root, depth, 0)
 ```
 
 ## Basic Operations
