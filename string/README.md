@@ -43,8 +43,8 @@ SEARCH(pattern, text, P, T, result)
 Here:
 - $s[i]$: ASCII values of characters.
 - $p$: size of input alphabet (commonly $256$ for ASCII characters).
-- $m$: a prime number used as modulus (commonly $101, 1e9+7,\ldots$) 
-Using modulo helps prevent integer overflow and reduces hash collisions.
+- $m$: a prime number used as modulus (commonly $101, 1e9+7,\ldots$)
+  - Using modulo helps prevent integer overflow and reduces hash collisions.
 
 > [!IMPORTANT]
 > **Compute next rolling hash**:
@@ -138,11 +138,11 @@ For example, prefix function of string "abcabcd" is $\left[0, 0, 0, 1, 2, 3, 0\r
 > [!IMPORTANT]
 > **Algorithm**:
 >
-> We compute the prefix values $\pi[i]$ in a loop by iterating from $i = 1$ to $i = n-1$ ($\pi[0]$  just gets assigned with $0$).
+> We compute the prefix values $\pi[i]$  in a loop by iterating from $i = 1$  to $i = n-1$ ($\pi[0]$  just gets assigned with $0$).
 >
-> To calculate the current value $\pi[i]$ we set the variable $j$ denoting the length of the best suffix for $i-1$. Initially $j = \pi[i-1]$.
+> To calculate the current value $\pi[i]$  we set the variable $j$  denoting the length of the best suffix for $i-1$. Initially $j = \pi[i-1]$.
 > 
-> Test if the suffix of length $j+1$ is also a prefix by comparing $s[j]$ and $s[i]$. If they are equal then we assign $\pi[i] = j + 1$.
+> Test if the suffix of length  $j+1$ is also a prefix by comparing $s[j]$  and $s[i]$. If they are equal then we assign $\pi[i] = j + 1$.
 >
 > <img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/be0156fc-45c9-401c-bcec-011e5c7af2a8" />
 >
@@ -151,7 +151,7 @@ For example, prefix function of string "abcabcd" is $\left[0, 0, 0, 1, 2, 3, 0\r
 > <img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/e876ceff-5cac-44c8-b684-48a4d81602ba" />
 > <img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/b1f2cac1-3c49-4dff-a4d0-d303bd59b8cf" />
 >
-> If we have reached the length $j = 0$ and still don't have a match, then we assign $\pi[i] = 0$ and go to the next index $i + 1$ .
+> If we have reached the length $j = 0$  and still don't have a match, then we assign $\pi[i] = 0$  and go to the next index $i + 1$ .
 
 ```cpp
 PREFIX_FUNCTION(s, n)

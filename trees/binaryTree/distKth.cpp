@@ -86,7 +86,7 @@ public:
 };
 
 //==============================
-// APPROACH 1: Turning binary tree into graph
+// APPROACH 2: DFS + Backtracking
 // -TC: O(n)
 // -SC: O(h)
 //==============================

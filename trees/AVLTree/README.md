@@ -2,8 +2,9 @@
 
 ## Properties:
 - Self balancing BST.
-- Maintaing extra information called **balanced factor** whose value is $\in \{-1;0;1\}$.
-- **Balanced Factor**: $$BF(N) = \text{Height}(\text{Left Subtree}) - \text{Height}(\text{Right Subtree})$$ By keeping balance factor of each node $\in \{-1;0;1\}$ after operations, AVL tree is balanced.
+- Maintaing extra information called **balanced factor** whose value is $\in \\{-1;0;1\\}$.
+- **Balanced Factor**: $$BF(N) = \text{Height}(\text{Left Subtree}) - \text{Height}(\text{Right Subtree})$$.
+  - By keeping balance factor of each node $\in \\{-1;0;1\\}$ after operations, AVL tree is balanced.
   
 <img src="/trees/AVLTree/images/image.png" width=50%></a>
 
@@ -29,6 +30,7 @@
 > where $N(h - 1)$ is # nodes in left subtree,  $N(h - 2)$ is # nodes in right subtree.
 >
 >**Base Cases**: (0-indexed)
+>
 > $h = 0$: A single root node.
 >
 > $$N(0) = 1$$
@@ -40,13 +42,14 @@
 > (Note: $N(-1)$ represents an empty tree, which has $0$ nodes).
 >
 > Calculating the first few cases gives us a sequence remsembling the **Fibonacci Sequence** ($F_0=0, F_1=1, F_2=1, F_3=2, F_4=3, F_5=5, F_6=8, F_7=13...$).
+>
 > The exact relationship is:
 >
 >$$N(h) = F_{h+3} - 1$$
 >
-> <img src="/trees/AVLTree/images/image-1.png" width=50%></a>
+> <img src="/trees/AVLTree/images/image-1.png"  width=50%></a>
 >
->_(Even though # nodes does not follow Fibonacci sequence exactly, # leaves do)._
+>_(Even though # nodes does not follow Fibonacci sequence exactly, # leaves does)._
 >
 > Verification for $h=2$:
 >
@@ -63,9 +66,13 @@
 > 
 > with $\phi=\dfrac{1+\sqrt{5}}{2},\ \psi=\dfrac{1-\sqrt{5}}{2}$.
 >
-> Since $\dfrac{|\psi^k|}{\sqrt{5}} < 1/2 \Rightarrow F_k = \left \lfloor \dfrac{\phi^k}{\sqrt{5}}\right \rceil$.
+> Since
 >
-> OR $\dfrac{\phi^k}{\sqrt{5}} - 1/2 \le F_k \le \dfrac{\phi^k}{\sqrt{5}} + 1/2$.
+> $$\dfrac{|\psi^k|}{\sqrt{5}} < 1/2 \Rightarrow F_k = \left \lfloor \dfrac{\phi^k}{\sqrt{5}}\right \rceil$$
+>
+> OR
+>
+> $$\dfrac{\phi^k}{\sqrt{5}} - 1/2 \le F_k \le \dfrac{\phi^k}{\sqrt{5}} + 1/2$$
 > 
 > We apply this to AVL Tree:
 >
@@ -83,6 +90,7 @@
 > $$n \ge \dfrac{\phi^{h+3}}{\sqrt{5}} - \dfrac{3}{2}$$
 > 
 > $$\sqrt{5}\left(n + \dfrac{3}{2}\right)  \ge \phi^{h+3}$$
+> 
 > Take $\log_\phi$:
 > 
 > ```math
@@ -101,6 +109,19 @@ A node now stores $4$ information:
 - Pointer to Left Subtree,
 - Pointer to Right Subtree,
 - Node's height.
+  
+```cpp
+GET_HEIGHT(node)
+  if node is NULL
+    return -1
+  return node->height
+```
+
+```cpp
+GET_BALANCE(root)
+    if root is NULL return 0 
+    return GET_HEIGHT(root->left) - GET_HEIGHT(root->right)
+```
 
 ### Rotation
 There will be $4$ cases needed rebalancing using rotations: **Left Left (L-L), Right Right (R-R), Left Right (L-R), Right Left (R-L)**.
@@ -111,28 +132,29 @@ There will be $4$ cases needed rebalancing using rotations: **Left Left (L-L), R
 
 <img src="/trees/AVLTree/images/image-3.png"  width=50%></a>
 
+
 ```cpp
 ROTATE_RIGHT(root)
-    Set newNode = root->left
-    root->left = newRoot->right
-    newRoot->right = root
-
-    newRoot->height = 1 + max(height(newRoot->left), height(newRoot->right))
-    root->height = 1 + max(height(root->left), height(root->right))
-
-    return newRoot
+  Set newNode = root->left
+  root->left = newRoot->right
+  newRoot->right = root
+  
+  root->height = 1 + max(GET_HEIGHT(root->left), GET_HEIGHT(root->right))
+  newRoot->height = 1 + max(GET_HEIGHT(newRoot->left), GET_HEIGHT(newRoot->right))
+  
+  return newRoot
 ```
 
 ```cpp
 ROTATE_LEFT(root)
-    Set newRoot = root->right
-    root->right = newRoot->left
-    newRoot->left = root
-
-    newRoot->height = 1 + max(height(newRoot->left), height(newRoot->right))
-    root->height = 1 + max(height(root->left), height(root->right))
-
-    return newRoot
+  Set newRoot = root->right
+  root->right = newRoot->left
+  newRoot->left = root
+  
+  root->height = 1 + max(GET_HEIGHT(root->left), GET_HEIGHT(root->right))
+  newRoot->height = 1 + max(GET_HEIGHT(newRoot->left), GET_HEIGHT(newRoot->right))
+  
+  return newRoot
 ```
 **DOUBLE ROTATIONS**
 
@@ -153,9 +175,8 @@ RIGHT_LEFT(root)
 ### Insertion
 Do normal BST Insertion, then rebalance using rotations ($4$ cases).
 
-<img src="/trees/AVLTree/images/image-5.png"  width=50%>
-<img src="/trees/AVLTree/images/image-6.png"  width=50%>
-
+<img src="/trees/AVLTree/images/image-5.png"  width=50%></a>
+<img src="/trees/AVLTree/images/image-6.png"  width=50%></a>
 ```cpp
 GET_BALANCE(root)
     if root is NULL return 0 
@@ -169,27 +190,27 @@ INSERT(node, key)
 
     if node->data > key
         node->left = INSERT(node->left, key)
-    else if node->data <> key
+    else if node->data < key
         node->right = INSERT(node->right, key)
     else 
         return node
 
     // Update the ancestors' height
-    node->height = 1 + max(node->left->height, node->right->height)
+    node->height = 1 + max(GET_HEIGHT(node->left), GET_HEIGHT(node->right))
 
     set balance = GET_BALANCE(node)
 
     if balance > 1
         // L-L
         if key <= node->left->data
-            return LEFT_ROTATION(node)
+            return RIGHT_ROTATION(node)
         // L-R
         else 
             return LEFT_RIGHT(node)
     else if balance < -1
         // R-R
         if key >= node->right->data
-            return RIGHT_ROTATION(node)
+            return LEFT_ROTATION(node)
         // R-L
         else
             return RIGHT_LEFT(node)
@@ -236,21 +257,21 @@ DELETE(node, key)
     if node is NULL
         return node
 
-    node->height = 1 + max(node->left->height, node->right->height)
+    node->height = 1 + max(GET_HEIGHT(node->left), GET_HEIGHT(node->right))
 
     set balance = GET_BALANCE(node)
 
     if balance > 1
         // L-L
         if GET_BALANCE(node->left) >= 0
-            return LEFT_ROTATION(node)
+            return RIGHT_ROTATION(node)
         // L-R
         else 
             return LEFT_RIGHT(node)
     else if balance < -1
         // R-R
         if GET_BALANCE(node->right) <= 0
-            return RIGHT_ROTATION(node)
+            return LEFT_ROTATION(node)
         // R-L
         else
             return RIGHT_LEFT(node)

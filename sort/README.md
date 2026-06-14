@@ -370,14 +370,16 @@ MERGE_SORT(a, low, high)
 > [!IMPORTANT] 
 > - Time complexity: $\Theta(n\log n)$ _for all cases_.
 > - Auxiliary space: $O(n)$ _used to create temporary subarrays during merging_.
+>   
 > Merge Sort is **stable**.
 
 
 > [!NOTE]
 > **Prove time complexity**
 > - **Divide**: only compute `mid` $\Rightarrow D(n) = \Theta(1)$.
-> - **Conquer**: recursively solve 2 subproblems, each of size $n/2$ $\Rightarrow 2T(n/2)$
+> - **Conquer**: recursively solve $2$ subproblems, each of size $n/2$ $\Rightarrow 2T(n/2)$
 > - **Combine**: `MERGE` on an $n$-element subarray takes $\Theta(n)$ time $\Rightarrow C(n) = \Theta(n)$
+>   
 > $D(n)$ and $C(n)$ summed together give a linear function $\Theta(n)$.
 > 
 > We have **recurrence** for Merge Sort:
@@ -454,7 +456,7 @@ QUICK_SORT(a, low, high)
 >    - Worst case: $\Theta(n^2)$.
 >    - Best/ average case: $\Theta(n\log n)$
 >      
-> Auxilliary Space:
+> Auxiliary Space:
 >    - Worst case: $O(n)$ _unbalanced partitioning leading to skewed recursion tree_.
 >    - Best/Average case: $O(\log n)$.
 >
@@ -539,7 +541,8 @@ QUICK_SORT(a, low, high)
 
 > [!NOTE]
 > **Correctness of Quicksort**
-> 1. `MERGE` function:
+> 
+> 1. `PARTITION` function:
 > 
 > **Loop invariant**:
 > - All entries in `a[low..i]` are $\le$ `pivot`.
@@ -547,6 +550,7 @@ QUICK_SORT(a, low, high)
 > - `a[high]=pivot`.  
 >
 > **Initialization**: Before the loop starts, `i = low-1` and `j = low`. The sets of elements $\le$ `pivot` and $>$ `pivot` are empty. The invariant is trivially true.
+> 
 > **Maintenance**:
 >    - If `a[j]` $>$ `pivot`, we just increment `j`. The second condition of the invariant remains true for the new `a[j-1]`.
 >   - If `a[j]` $\le$ `pivot`, we increment `i`, swap `a[i]` and `a[j]`, then increment `j`. Now `a[i]` is $\le$ pivot, and the invariant is maintained.
@@ -554,11 +558,13 @@ QUICK_SORT(a, low, high)
 > **Termination**: The loop finishes when `j = high`. At this point, every element in the array (except the pivot at `a[high]`) has been sorted into one of the two partitions. We perform one final swap between `a[i+1]` and `a[high]` to put the pivot in its correct position.
 >
 > Now we prove the recursive algorithm using **Induction** on the number of elements $n$.
+> 
 > **Claim**: `QUICKSORT(A, low, high)` correctly sorts the subarray `a[low..high]`.
 > 
 > **Base Case** ($n \le 1$): If `low` $\ge$ `high`, the subarray has at most one element. A single element is already sorted by definition. The algorithm returns immediately.
 > 
 > **Inductive Step**: Assume `QUICKSORT` correctly sorts subarrays of any size $k < n$.
+> 
 > - **Partition**: The `PARTITION` procedure returns an index `pi`. As proven above, `a[pi]` is now in its final sorted position, with smaller elements to the left and larger to the right.
 > - **Subproblems**: The algorithm calls `QUICKSORT(a, low, pi-1)` and `QUICKSORT(a, pi+1, high)`.
 > - Since the pivot is at index `pi`, both sub-arrays must have sizes smaller than $n$. By our inductive hypothesis, these two recursive calls will correctly sort the left and right segments.

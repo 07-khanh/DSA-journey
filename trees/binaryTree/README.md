@@ -13,7 +13,7 @@
 ## Properties of BT:
 > [!NOTE]
 > 1. Max # nodes at level $l$ : $2^l$.
-> 2. Max # nodes of BT of height $h$: $2^{h+1}-1$.[^1]
+> 2. Max # nodes of BT of height $h$: $2^{h+1}-1$.
 > 3. Min height for $N$ nodes: $\lfloor \log_2N \rfloor$.[^2]
 > 4. Min levels for $L$ leaves: $\lfloor \log_2L \rfloor$
 > 5. Total edges of BT with $n$ nodes: $n-1$ _(Because each node has 1 parent, except root)_.
@@ -55,17 +55,27 @@ All levels are filled except for the last level, which is filled from as left as
 Leverage the array index properties. <a href="#properties-of-complete-bt">view</a>
 
 ```cpp
-bool countNodes(node, index, totalNodes)
-    If node is NULL
-        return true
+COUNT_NODES(root)
+    if root is NULL
+        return 0
+    return 1 + COUNT_NODES(root->left) + COUNT_NODES(root->right)
+```
+```cpp
+CHECK(node, index, totalNodes)
+If node is NULL
+    return true
 
-    // Invalid index
-    If idx >= totalNodes
-        return false
+// Invalid index
+If idx >= totalNodes
+    return false
 
-    return countNodes(node->left, 2*index+1, totalNodes)
-            && countNodes(node->right, 2*index+2, totalNodes)
-    
+return countNodes(node->left, 2*index+1, totalNodes)
+        and countNodes(node->right, 2*index+2, totalNodes)
+```
+```cpp
+CHECK_COMPLETE(root)
+    totalNodes = COUNT_NODES(root)
+    return CHECK(root, 0, totalNodes)
 ```
 
 ### Perfect Binary Tree:
@@ -82,7 +92,7 @@ Recursively, a perfect BT can be defined as:
 > [!IMPORTANT]
 > **Perfect Binary Tree (PBT) Theorems**
 > 1. \# nodes in PBT with height $h$: $2^{h+1}-1$.
-> 2. Height of PBT with $n$ nodes: $\log(n+1)-1$.
+> 2. Height of PBT with $n$ nodes: $\log_2(n+1)-1$.
 > 3. \# leaf nodes in PBT with height $h$: $2^h$.
 
 #### Check for Perfect BT:
@@ -92,14 +102,15 @@ Approach:
   
 ``` cpp
 // Calculate depth of leftmost leaf
-int leftDepth(root) 
-    d = 0
+LEFT_DEPTH(root) 
+    set d = 0
     while root->left is not NULL 
-        ++d
+        d = d + 1
         node = node->left
     return d
-
-bool checkPerfect(node, depth, level)
+```
+```cpp
+CHECK(node, depth, level)
     if root is NULL
         return true
     
@@ -109,14 +120,15 @@ bool checkPerfect(node, depth, level)
     if root->right is NULL or root->left is NULL
         return false
     
-    return checkPerfect(root->left, depth, level+1)
-        && checkPerfect(root->right, depth, level+1)
-
-bool checkPerfectTree(root) 
+    return CHECK(root->left, depth, level+1)
+        && CHECK(root->right, depth, level+1)
+```
+```cpp
+CHECK_PERFECt(root) 
     if root is NULL
         return true
-    depth = leftDepth(root)
-    return checkPerfect(root, depth, 0)
+    depth = LEFT_DEPTH(root)
+    return CHECK(root, depth, 0)
 ```
 
 ## Basic Operations
@@ -168,6 +180,7 @@ Because the sequences are identical for two different tree structures, the mappi
 
 > [!CAUTION]
 > **EXCEPTION**
+> 
 > A unique tree can be constructed from Preorder and Postorder if the tree is a **Full Binary Tree** (where every node has either 0 or 2 children).
 
 #### Recursive Construction Logic (Preorder + Inorder):
@@ -183,27 +196,28 @@ The process of construction follows a "Divide and Conquer" pattern:
     - Repeat for the right subtree.
 > [!CAUTION]
 > **Another way**
+> 
 > **Inorder + Level-order** is also sufficient to construct a unique binary tree, but more complicated.
 
 ## Problems:
-1. <a href="/binaryTree/maxHeight.cpp">Max Depth</a>.
-2. <a href="/binaryTree/checkBalanced.cpp">Check for Balanced BT</a>.
-3. <a href="/binaryTree/diameter.cpp">Find diameter of BT</a>[^4].
-4. <a href="/binaryTree/maxPathSum.cpp">Find max path sum</a>.
+1. <a href="./maxHeight.cpp">Max Depth</a>.
+2. <a href="./checkBalanced.cpp">Check for Balanced BT</a>.
+3. <a href="./diameter.cpp">Find diameter of BT</a>[^4].
+4. <a href="./maxPathSum.cpp">Find max path sum</a>.
 5. <a href="">Check if two BT are identical</a>.
-6. <a href ="/binaryTree/zigzag.cpp">Zig zag Level order Traversal</a>.
-7. <a href="/binaryTree/boundaryTraversal.cpp">Boundary Traversal</a>.
-8. <a href="/binaryTree/verticalOrder.cpp">Vertical Order Traversal</a>
-9. <a href="/binaryTree/rightView.cpp">Right/Left view of BT</a>.
-10. <a href="/binaryTree/mirror.cpp">Symmetric Tree</a>.
-11. <a href="/binaryTree/rootToNodePath.cpp">Root to Node Path</a>.
-12. <a href="/binaryTree/lca.cpp">LCA in BT</a>.
-13. <a href="/binaryTree/maxWidth.cpp">Max Width of BT</a>.
-14. <a href="/binaryTree/distKth.cpp">Print all nodes with Distance K</a>.
-15. <a href="/binaryTree/infectionTime.cpp">Amount of Time for Binary Tree to Be Infected</a>.
-16. <a href="/binaryTree/countNodeComplete.cpp">Count Complete Tree Nodes</a>.
-17. <a href="/binaryTree/constructPaths.cpp">Construct Binary Tree from Preorder and Inorder Traversal</a>.
-18. <a href="/binaryTree/flatten.cpp">Flatten BT to Linked List</a>.
+6. <a href ="./zigzag.cpp">Zig zag Level order Traversal</a>.
+7. <a href="./boundaryTraversal.cpp">Boundary Traversal</a>.
+8. <a href="./verticalOrder.cpp">Vertical Order Traversal</a>
+9. <a href="./rightView.cpp">Right/Left view of BT</a>.
+10. <a href="./mirror.cpp">Symmetric Tree</a>.
+11. <a href="./rootToNodePath.cpp">Root to Node Path</a>.
+12. <a href="./lca.cpp">LCA in BT</a>.
+13. <a href="./maxWidth.cpp">Max Width of BT</a>.
+14. <a href="./distKth.cpp">Print all nodes with Distance K</a>.
+15. <a href="./infectionTime.cpp">Amount of Time for Binary Tree to Be Infected</a>.
+16. <a href="./countNodeComplete.cpp">Count Complete Tree Nodes</a>.
+17. <a href="./constructPaths.cpp">Construct Binary Tree from Preorder and Inorder Traversal</a>.
+18. <a href="./flatten.cpp">Flatten BT to Linked List</a>.
 
 
 

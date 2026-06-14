@@ -7,23 +7,23 @@
 > **Binary Search Tree (BST) Property:**
 > 
 > Let $x$ be a node in a binary search tree. 
-> - If $y$ is a node in the left subtree of $x$ , then $y.key \le x.key$.  
-> - If $y$ is a node in the right subtree of $x$ , then $y.key \ge x.key$.
+> - If $y$ is a node in the left subtree of $x$ , then $y.data \le x.data$.  
+> - If $y$ is a node in the right subtree of $x$ , then $y.data \ge x.data$.
 
 - **Inorder Traversal** of a BST gives sorted order of elements.
 - Average height: $O(\log n)$.
-- Worst case height: $O(n)$ (skewed Tree)
+- Worst case height: $O(n)$ (Skewed Tree)
 
 ## Basic Operations:
 
 ### Tree Walk
 
 ```cpp
-INORDER-TREE-WALK(x)
-  if x != NIL
-    INORDER-TREE-WALK(left[x])
-    print key[x]
-    INORDER-TREE-WALK(right[x])
+INORDER-TREE-WALK(node)
+  if node != NULL
+    INORDER-TREE-WALK(node->left)
+    print node->data
+    INORDER-TREE-WALK(node->right)
 ```
 
 - Time complexity: $\Theta (n)$.

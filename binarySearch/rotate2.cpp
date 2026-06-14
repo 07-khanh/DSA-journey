@@ -35,7 +35,7 @@ public:
                 --high;
             }
             // Check if the left half is sorted
-            if (nums[low] <= nums[mid]) {
+            else if (nums[low] <= nums[mid]) {
 
                 // Check if target is in left half -> shrink search space
                 if (nums[low] <= target && nums[mid] >= target) 
