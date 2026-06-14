@@ -7,7 +7,7 @@
   
 <img src="/trees/AVLTree/images/image.png" width=50%></a>
 
->[!NOTE] 
+> [!NOTE]
 > **Minimum number of nodes in AVL Tree**
 >
 > Denote $N(h)$ to be minimum # nodes in AVL Tree of height $h$.
@@ -44,7 +44,7 @@
 >
 >$$N(h) = F_{h+3} - 1$$
 >
-> <img src="/trees/AVLTree/images/image-1.png  width=50%"></a>
+> <img src="/trees/AVLTree/images/image-1.png" width=50%></a>
 >
 >_(Even though # nodes does not follow Fibonacci sequence exactly, # leaves do)._
 >
@@ -136,7 +136,7 @@ ROTATE_LEFT(root)
 ```
 **DOUBLE ROTATIONS**
 
-<img src="/trees/AVLTree/images/image-2.png"  width=50%></a>
+<img src="/trees/AVLTree/images/image-2.png"  width=50%>
 
 ```cpp
 LEFT_RIGHT(root)
@@ -153,8 +153,9 @@ RIGHT_LEFT(root)
 ### Insertion
 Do normal BST Insertion, then rebalance using rotations ($4$ cases).
 
-<img src="/trees/AVLTree/images/image-5.png"  width=50%></a>
-<img src="/trees/AVLTree/images/image-6.png"  width=50%></a>
+<img src="/trees/AVLTree/images/image-5.png"  width=50%>
+<img src="/trees/AVLTree/images/image-6.png"  width=50%>
+
 ```cpp
 GET_BALANCE(root)
     if root is NULL return 0 

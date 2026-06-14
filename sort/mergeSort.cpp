@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+//=========================
+// Merge Sort on Array
+//=========================
+
 void MERGE(int A[], int low, int mid, int high) {
     int n_l = mid - low + 1;
     int n_r = high - mid;
@@ -42,3 +46,52 @@ void MERGE_SORT(int A[ ], int low, int high) {
 }
 
 
+//=========================
+// Merge Sort on Linked List
+//=========================
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* SPLIT(Node* head) {
+    Node* fast = head;
+    Node* slow;
+
+    while (fast && fast->next) {
+        fast = fast->next->next;
+
+        if (fast->next)
+            slow = slow->next;
+    }
+    Node* temp = slow->next;
+    slow->next = nullptr;
+    return temp;
+}
+
+Node* MERGE(Node* first, Node* second) {
+    if (!first) return first;
+    if (!second) return second;
+
+    if (first->data <= second->data) {
+        first->next = MERGE(first->next, second);
+        return first;
+    }
+    else {
+        second->next = MERGE(first, second->next);
+        return second;
+    }
+} 
+
+Node* MERGE_SORT(Node* head) {
+    if (!head || !head->next) return head;
+    
+    Node* mid = SPLIT(head);
+
+    MERGE_SORT(head);
+    MERGE_SORT(mid);
+    MERGE(head, mid);
+
+    return head;
+}

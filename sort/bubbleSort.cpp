@@ -14,6 +14,10 @@ Space complexity: O(1).
 
 */
 
+//=========================
+// Bubble Sort on Array
+//=========================
+
 void BUBBLE_SORT(int a[], int n) {
     for (int i{0}; i < n-1; ++i) 
         for (int j{0}; j < n-i-1 ; ++j) 
@@ -34,4 +38,62 @@ void BUBBLE_SORT(int a[], int n) {
         // If no two elements are swapped, then break
         if (!didSwap) break;
     } 
+}
+
+//=========================
+// Bubble Sort on Linked List
+//=========================
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+int COUNT_NODE(Node* head) {
+    int count{0};
+
+    Node* it = head;
+    while (it) {
+        it = it->next;
+        ++count;
+    }
+    return count;
+}
+
+Node* BUBBLE_SORT(Node* head) {
+    if (!head || !head->next) return head;
+
+    int it = COUNT_NODE(head);
+
+    for (int i{0}; i < it; ++i) {
+        Node* prev = nullptr;
+        Node* cur = head;
+        bool swapped = false;
+
+        while (cur->next) {
+            Node* next = cur->next;
+
+            if (cur->data > next->data) {
+                swapped = true;
+                if (cur == head) {
+                    cur->next = next->next;
+                    next->next = cur;
+                    prev = next;
+                    head = prev;
+                }
+                else {
+                    cur->next = next->next;
+                    next->next = cur;
+                    prev->next = next;
+                    prev = next;
+                }
+            }
+            else {
+                prev = cur;
+                cur = cur->next;
+            }
+        }
+        if (!swapped) break;
+    }
+    return head;
 }

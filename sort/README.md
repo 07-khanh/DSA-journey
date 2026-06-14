@@ -100,7 +100,7 @@ SELECTION_SORT(a, n)
 > 
 > Thus TC for **Selection Sort** is $\Theta(n^2)$.
 
-> [!NOTE] 
+> [!NOTE]
 > **Correctness of Selection Sort**
 > 
 > **Loop invariant**: At the start of each iteration $i$ of the outer for loop, the subarray `a[0 .. i-1]` consists of the $i$ smallest elements of the original array, in sorted order.
@@ -252,7 +252,7 @@ BUILD_MAX_HEAP(a, n)
         MAX_HEAPIFY(a, i, n)
 ```
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > In a heap of $n$ elements, the number of nodes at height $h$ is at most:
 >
 > $$\left\lceil \frac{n}{2^{h+1}} \right\rceil$$
@@ -293,7 +293,7 @@ HEAPSORT(a, n)
 4.        MAX_HEAPIFY(a, 0, i)
 ```
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Line 1: `BUILD_MAX_HEAP` $\Rightarrow O(n)$.
 > 
 > Line 2-4: `for` loop runs $n-1$ times.
@@ -305,7 +305,7 @@ HEAPSORT(a, n)
 > 
 > Therefore, running time of Heapsort is $O(n\log n)$
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Space complexity: $O(n)$ due to call stack.
 
 > [!NOTE]
@@ -597,7 +597,7 @@ We can prove that:
 > [!IMPORTANT]
 Any decision tree that sort $n$ elements has height $\Omega(n \log n)$
 
-> [!NOTE] 
+> [!NOTE]
 > **Proof**
 > 
 > Let $l$ be # of leaves, then:
@@ -657,7 +657,7 @@ COUNTING_SORT(a, b, n, k)
         c[a[i]]--
 ```
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > **Time complexity**: $\Theta(n+k)$, which is $\Theta(n)$ if $k=O(n)$.
 > 
 > **Auxiliary Space**: $\Theta(n + k)$, which is space taken by `b` and `c`.
@@ -693,7 +693,7 @@ RADIX_SORT(a, d)
 >
 > This is why using a **stable** sort algorithm is so important
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > **Time complexity**: $\Theta(d(n+k))$ and $\Theta(dn)$ if $k=O(n)$.
 > 
 > **Auxiliary Space**: $O(n+k)$

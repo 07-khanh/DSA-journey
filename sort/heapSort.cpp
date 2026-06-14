@@ -44,7 +44,7 @@ void BUILD_MAX_HEAP(vector<int>& heap) {
 //===========================
 void HEAPSORT(vector<int>& A) {
     int n = A.size();
-    BUILD_MAX_HEAP(A, n);
+    BUILD_MAX_HEAP(A);
     
     for (int i = n - 1; i >= 1; --i) {
         swap(A[n-1], A[0]);
@@ -54,7 +54,7 @@ void HEAPSORT(vector<int>& A) {
 
 
 //===========================
-// USE SEPARATE HEAP
+// USE SEPARATE HEAP (priority queue behaviour)
 //===========================
 
 int EXTRACT_MAX(vector<int>& heap) {
@@ -89,7 +89,7 @@ void HEAPSORT(vector<int>& A) {
     vector<int> heap;
     for (int i{0}; i < n; ++i)
         heap.push_back(A[i]);
-    BUILD_MAX_HEAP(A[i]);
+    BUILD_MAX_HEAP(heap);
 
     for (int i{n-1}; i >= 0; --i) {
         int maxi = EXTRACT_MAX(heap);
