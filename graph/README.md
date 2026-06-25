@@ -148,17 +148,20 @@ Contains vertices but has zero edges ($E = \emptyset$) _(some books might define
 <img src='/graph/images/null.png' width=300>
 
 ### Regular Graph
-Every vertex has the exact same degree $k$ (called a $k$-regular graph). It contains $\frac{n \times k}{2}$ edges.  
+Every vertex has the exact same degree $k$ (called a $k$-regular graph). It contains $\frac{n \times k}{2}$ edges. 
+
 <img src='/graph/images/regular.png' width=600>
 
 ### Complete Graph 
 A Complete Graph ($K_n$) is a simple graph where an edge exists between every single pair of vertices. It has exactly $\frac{n(n-1)}{2}$ edges.  
 
 This is a complete graph of $5$ vertices $K_5$.
+
 <img src='/graph/images/complete.png' width=400>
 
 ### Bipartite Graph 
 The vertex set $V$ can be partitioned into two sets ($V, U$) such that edges only connect vertices between $V$ and $U$, never within the same set.  
+
 <img src='/graph/images/bipartite.png' width=300>
 
 #### Properties
